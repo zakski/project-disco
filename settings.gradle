@@ -1,0 +1,5 @@
+rootProject.name = 'project-disco'
+include 'module/phobail'
+project(':module/phobail').projectDir = new File('./module/maeve/module/phobail/')
+
+include 'module/maeve'
