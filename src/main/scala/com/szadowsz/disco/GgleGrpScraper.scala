@@ -18,15 +18,14 @@ import org.slf4j.LoggerFactory
 object GgleGrpScraper {
   private val logger = LoggerFactory.getLogger(this.getClass)
   private val link = "https://groups.google.com/forum/#!forum/comp.sources.d"
-  private val username: String = "exe.cute.filter@gmail.com"
-  private val passwd: String = "Damocles1!"
+  private val username: String = ""
+  private val passwd: String = ""
   private val urlOfGrp = Uri(link)
   private val groupName: String = link.substring(link.lastIndexOf("/") + 1)
 
   private def buildConfig(): MaeveConf = {
     MaeveConf()
       .setJavaScriptEnabled(true)
-      .setHTTPProxy("proxy", 8080, Nil)
       .setThrowExceptionOnScriptError(false)
   }
 
