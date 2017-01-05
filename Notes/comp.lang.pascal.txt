@@ -1,0 +1,4 @@
+1987-
+Pascal to C translator
+1990-91
+Psuedorandom number generator
