@@ -26,6 +26,9 @@ idea {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'http://dl.bintray.com/zakski/default'
+    }
 }
 
 
@@ -34,8 +37,8 @@ repositories {
  * slf4j logger, scalatest and junit.
  */
 dependencies {
-    compile project(':module/phobail')
-    compile project(':module/maeve')
+    compile group: 'com.szadowsz', name: 'an-phobail', version: '0.0.1'
+    compile group: 'com.szadowsz', name: 'maeve', version: '0.0.1'
 
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: seleniumVersion
 

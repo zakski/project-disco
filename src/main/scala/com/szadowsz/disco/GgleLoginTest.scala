@@ -43,7 +43,7 @@ object GgleLoginTest {
     val rootFilter = new TestExtractor()
 
     val actions = new GgleExecutor(username, passwd)
-    val rootInstruction = MaeveInstruction(groupName, rootTarget, actions, rootFilter, "./data/grp/", false, false,MaeveConf().setNoProxy())
+    val rootInstruction = MaeveInstruction(groupName, rootTarget, actions, rootFilter, "./data/grp/", false, false, false, MaeveConf().setNoProxy())
 
     scraper.feedInstruction(rootInstruction)
     scraper.scrapeUsingCurrInstruction()
