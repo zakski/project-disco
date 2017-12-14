@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory
   */
 object GgleGrpScraper {
   private val logger = LoggerFactory.getLogger(this.getClass)
-  private val link = "https://groups.google.com/forum/#!forum/comp.sources.d"
+  private val link = "https://groups.google.com/forum/#!forum/rec.games.frp.dnd"
   private val username: String = ""
   private val passwd: String = ""
   private val urlOfGrp = Uri(link)
@@ -32,19 +32,20 @@ object GgleGrpScraper {
 
   def main(args: Array[String]): Unit = {
     System.setProperty("webdriver.chrome.driver", ".\\chromedriver_win32\\chromedriver.exe")
-    val conf = buildConfig()
+    val conf = buildConfig().setNoProxy().setSkipProxyTestEnabled(true)
     val scraper = new MaeveDriver(conf)
 
     val target = FragmentFeederTarget(Uri("https://groups.google.com/forum/"))
     val rootTarget = SingleTarget(urlOfGrp)
     val rootFilter = new GrpExtractor()
 
-  // val yearfilters = (1986, 1989) +: Range.inclusive(1989, 2006).toList.map(st => (st, st + 1)) :+ (2006, 2017)
-   val yearfilters = Range.inclusive(1986, 1988).toList.map(st => (st, st + 1)) //:+ (2014, 2017)
+   val yearfilters = (1986, 1989) +: Range.inclusive(1989, 2006).toList.map(st => (st, st + 1)) :+ (2006, 2017)
+ //  val yearfilters = Range.inclusive(1986, 1988).toList.map(st => (st, st + 1)) //:+ (2014, 2017)
     yearfilters.foreach { case (fStart, fEnd) =>
       logger.info("Getting Topics Between {} : {}",fStart,fEnd)
       val actions = new GgleGrpExecutor(fStart, fEnd, username, passwd)
-      val rootInstruction = MaeveInstruction(groupName, rootTarget, actions, rootFilter, "./data/grp/", false, false, MaeveConf().setNoProxy())
+      val rootInstruction = MaeveInstruction(groupName, rootTarget, actions, rootFilter, "./data/grp/", false, false, false,MaeveConf().setNoProxy()
+        .setSkipProxyTestEnabled(true))
 
       scraper.feedInstruction(rootInstruction)
       scraper.scrapeUsingCurrInstruction()
